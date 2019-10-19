@@ -6,15 +6,15 @@ Additional informations:
 
 - just place your bind9 configuration in a volume and mount it to /etc/bind
 
+Currently the docker image is not tested, my ubuntu machine did not allow me to get the port 53 free (libvirt dnsmasq was in the way and I could not get it out)...
+
 ## installation
 
-	docker pull fermat42/docker-bind
+Check out this repo and build (currently no docker hub image available).
 
 ## build
 
-	docker build -t fermat42/docker-bind .
-
-Each pull request will be builded automatically by docker hub.
+        docker build -t bocker-bind:test .
 
 ## docker-compose template
 
@@ -24,6 +24,10 @@ Each pull request will be builded automatically by docker hub.
 	    - ./bind:/etc/bind
 	  ports:
 	    - "53:53/udp"
+
+## docker run example
+
+        docker run -d --restart always -p 53:53/udp --name bind -t -v /home/fermat/repositories/bind:/etc/bind docker-bind:test
 
 # Example configuration
 
